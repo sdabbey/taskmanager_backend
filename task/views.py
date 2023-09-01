@@ -1,10 +1,10 @@
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
-from .models import Task
+from .models import Todo
 import random
 # Create your views here.
 def home(request):
-    tasks = Task.objects.all()
+    tasks = Todo.objects.all()
     image_urls = [
             "https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
             
@@ -24,14 +24,14 @@ def create_task(request):
     
     if request.method == "POST":
         task_text = request.POST.get('task_text')
-        Task.objects.create(name=task_text)
+        Todo.objects.create(name=task_text)
         return JsonResponse({'status': 'success'})
         
     return render(request, "index.html")
 
 def delete_task(request, id):
     if request.method == "POST":
-        task = Task.objects.get(id=id)
+        task = Todo.objects.get(id=id)
         task.delete()
         return JsonResponse({'status': 'success'})
     return render(request, "index.html")
