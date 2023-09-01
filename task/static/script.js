@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 delete_btns.forEach(btn => {
     btn.addEventListener("click", () => {
-        alert("hello")
+       
         fetch('/delete_task/'+ btn.id + '/', {
         method: 'POST',
         headers: {
